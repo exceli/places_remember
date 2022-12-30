@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<nav class="navbar bg-body-tertiary navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">Navbar</a>
+        <div>
+            {% if user.is_authenticate %}
+            <span style="color: white;">{{ user.username }}</span>
+            <a href="{% url 'account_logout' %}">Выход</a>
+            {% else %}
+            <a href="{% url 'account_signin' %}">Регистрация</a>
+            <a href="{% url 'account_login' %}">Вход</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
