@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "app_user.apps.AppUserConfig",
     "allauth",
     "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.vk",
 ]
 
 MIDDLEWARE = [
