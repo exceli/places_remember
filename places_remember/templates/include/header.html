@@ -1,16 +1,27 @@
-{% load i18n %}
+{% load i18n static account %}
+
 
 <nav class="navbar bg-body-tertiary navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand">Navbar</a>
-        <div>
-            {% if user.is_authenticate %}
-            <span style="color: white;">{{ user.username }}</span>
-            <a href="{% url 'account_logout' %}">Выход</a>
+        <a href="{% url 'home' %}" class="navbar-brand">Places Remember</a>
+        <span class="navbar-text">
+            {% if request.user.is_authenticated %}
+                <div>
+                    <a type="button" class="btn btn-custom" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="profile-image" src="{{ user.socialaccount_set.all.0.get_avatar_url }}">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a style="color: black;" class="dropdown-item" type="button">{{ user.username }}</a></li>
+                        <li><a style="color: black;" class="dropdown-item"
+                               type="button">{% trans 'Добавить место' %}</a></li>
+                        <li><a style="color: black;" href="{% url 'account_logout' %}" class="dropdown-item"
+                               type="button">{% trans 'Выход' %}</a></li>
+                    </ul>
+                </div>
             {% else %}
-            <a href="{% url 'account_signin' %}">Регистрация</a>
-            <a href="{% url 'account_login' %}">Вход</a>
+                <a href="{% url 'account_signup' %}">{% trans 'Регистрация' %}</a> | <a
+                href="{% url 'account_login' %}?next={{ request.get_full_path }}">{% trans 'Вход' %}</a>
             {% endif %}
-        </div>
+      </span>
     </div>
 </nav>
