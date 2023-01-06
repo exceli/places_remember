@@ -1,6 +1,28 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 
 {% block content %}
-<p>Привет! Это стартовая страница с описанием сервиса! Тут есть кнопки зарегистрироваться, и войти!</p>
+<div class="col-md-12">
+    {% for item in places %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <p>{% trans 'Автор' %}: <a href="#">{{ item.auth }}</a></p>
+        </div>
+        <p></p>
+        <div class="card-body">
+            <div class="media">
+                <div class="media-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-address">{{ item.address }}</p>
+                    <p class="card-text">{{ item.get_trim_review|safe|linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <p>{% trans 'Дата создания' %}: {{ item.created_at|date:"Y.m.d H:i:s" }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

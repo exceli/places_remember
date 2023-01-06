@@ -12,8 +12,8 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a style="color: black;" class="dropdown-item" type="button">{{ user.username }}</a></li>
-                        <li><a style="color: black;" class="dropdown-item"
-                               type="button">{% trans 'Добавить место' %}</a></li>
+                        <li><a style="color: black;" href="{% url 'created' %}" class="dropdown-item"
+                               type="button">{% trans 'Добавить воспоминание' %}</a></li>
                         <li><a style="color: black;" href="{% url 'account_logout' %}" class="dropdown-item"
                                type="button">{% trans 'Выход' %}</a></li>
                     </ul>

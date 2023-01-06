@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<h1>{% trans 'Добавление воспоминания' %}</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div id="customMapPlaceRemember" style="width: 600px; height: 400px"></div>
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary btn-block">{% trans 'Добавить' %}</button>
+</form>
+
+{% endblock %}
