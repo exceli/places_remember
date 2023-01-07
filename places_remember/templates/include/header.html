@@ -11,7 +11,7 @@
                         <img class="profile-image" src="{{ user.socialaccount_set.all.0.get_avatar_url }}">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a style="color: black;" class="dropdown-item" type="button">{{ user.username }}</a></li>
+                        <li><span style="color: black;" class="dropdown-item">{{ user.username }}</span></li>
                         <li><a style="color: black;" href="{% url 'created' %}" class="dropdown-item"
                                type="button">{% trans 'Добавить воспоминание' %}</a></li>
                         <li><a style="color: black;" href="{% url 'account_logout' %}" class="dropdown-item"

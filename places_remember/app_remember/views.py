@@ -1,5 +1,6 @@
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms import HiddenInput
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from .forms import PlaceForm
@@ -11,16 +12,20 @@ class PlaceView(LoginRequiredMixin, ListView):
     template_name = 'remember/index.html'
     context_object_name = 'places'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
 
 class CreatedPlaceView(LoginRequiredMixin, CreateView):
     form_class = PlaceForm
     template_name = 'remember/place_created.html'
     success_url = reverse_lazy('home')
     raise_exception = True
+
+    def get_context_data(self, **kwargs):
+        form = PlaceForm()
+        context = super().get_context_data(**kwargs)
+        form.fields['address'].widget = HiddenInput()
+        context['form'] = form
+        return context
+
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

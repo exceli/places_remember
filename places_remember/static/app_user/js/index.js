@@ -1,20 +1,4 @@
-{% load static %}
-<!doctype html>
-<html lang="ru">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Place Remember</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="icon" type="image/x-icon" href="./media/base/favicon.png">
-    <link type="text/css" rel="stylesheet" href="{% static 'app_user/css/normalize.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'app_user/css/style.css' %}">
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=42de0563-a8e7-4b7f-ac0b-7f1e304da933&lang=ru_RU"
-        type="text/javascript">
-        </script>
-    <script type="text/javascript">
+<script type="text/javascript">
         // Функция ymaps.ready() будет вызвана, когда
         // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
         ymaps.ready(init);
@@ -24,14 +8,13 @@
                 myMap = new ymaps.Map('customMapPlaceRemember', {
                     center: [55.753994, 37.622093],
                     zoom: 9,
-                    controls: ['zoomControl', 'typeSelector', 'rulerControl']
+                    controls: ['geolocationControl']
                 }, {
                     searchControlProvider: 'yandex#search'
                 });
 
             // Слушаем клик на карте.
             myMap.events.add('click', function (e) {
-                var coordInput = document.getElementById('id_address');
                 var coords = e.get('coords');
 
                 // Если метка уже создана – просто передвигаем ее.
@@ -47,9 +30,7 @@
                         getAddress(myPlacemark.geometry.getCoordinates());
                     });
                 }
-                coordInput.value = coords;
-                // console.log({ a: coordInput.value, coords })
-
+                getAddress(coords);
             });
 
             // Создание метки.
@@ -84,22 +65,3 @@
             }
         }
     </script>
-</head>
-<header>
-    {% include 'include/header.html' %}
-</header>
-
-<body>
-    <div class="container mt-3">
-        {% block content %}{% endblock %}
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-        crossorigin="anonymous"></script>
-</body>
-<footer>
-    {% include 'include/footer.html' %}
-</footer>
-
-</html>
