@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}
 {{ title }}
@@ -14,5 +14,5 @@
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary btn-block">{% trans 'Добавить' %}</button>
 </form>
-
+<script type="text/javascript" src="{% static 'app_remember/js/index.js' %}"></script>
 {% endblock %}

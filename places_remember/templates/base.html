@@ -8,82 +8,12 @@
     <title>Place Remember</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="icon" type="image/x-icon" href="./media/base/favicon.png">
+    <link rel="icon" type="image/x-icon" href="../app_remember/static/app_remember/images/favicon.ico">
     <link type="text/css" rel="stylesheet" href="{% static 'app_user/css/normalize.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'app_user/css/style.css' %}">
     <script src="https://api-maps.yandex.ru/2.1/?apikey=42de0563-a8e7-4b7f-ac0b-7f1e304da933&lang=ru_RU"
         type="text/javascript">
         </script>
-    <script type="text/javascript">
-        // Функция ymaps.ready() будет вызвана, когда
-        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-        ymaps.ready(init);
-        function init() {
-
-            var myPlacemark,
-                myMap = new ymaps.Map('customMapPlaceRemember', {
-                    center: [55.753994, 37.622093],
-                    zoom: 9,
-                    controls: ['zoomControl', 'typeSelector', 'rulerControl']
-                }, {
-                    searchControlProvider: 'yandex#search'
-                });
-
-            // Слушаем клик на карте.
-            myMap.events.add('click', function (e) {
-                var coordInput = document.getElementById('id_address');
-                var coords = e.get('coords');
-
-                // Если метка уже создана – просто передвигаем ее.
-                if (myPlacemark) {
-                    myPlacemark.geometry.setCoordinates(coords);
-                }
-                // Если нет – создаем.
-                else {
-                    myPlacemark = createPlacemark(coords);
-                    myMap.geoObjects.add(myPlacemark);
-                    // Слушаем событие окончания перетаскивания на метке.
-                    myPlacemark.events.add('dragend', function () {
-                        getAddress(myPlacemark.geometry.getCoordinates());
-                    });
-                }
-                coordInput.value = coords;
-                // console.log({ a: coordInput.value, coords })
-
-            });
-
-            // Создание метки.
-            function createPlacemark(coords) {
-                return new ymaps.Placemark(coords, {
-                    iconCaption: 'поиск...'
-                }, {
-                    preset: 'islands#violetDotIconWithCaption',
-                    draggable: true
-                });
-            }
-
-            // Определяем адрес по координатам (обратное геокодирование).
-            function getAddress(coords) {
-                myPlacemark.properties.set('iconCaption', 'поиск...');
-                ymaps.geocode(coords).then(function (res) {
-                    var firstGeoObject = res.geoObjects.get(0);
-
-                    myPlacemark.properties
-                        .set({
-                            // Формируем строку с данными об объекте.
-                            iconCaption: [
-                                // Название населенного пункта или вышестоящее административно-территориальное образование.
-                                firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas(),
-                                // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
-                                firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
-                            ].filter(Boolean).join(', '),
-                            // В качестве контента балуна задаем строку с адресом объекта.
-                            balloonContent: firstGeoObject.getAddressLine()
-                        });
-                });
-            }
-        }
-    </script>
 </head>
 <header>
     {% include 'include/header.html' %}
@@ -92,6 +22,7 @@
 <body>
     <div class="container mt-3">
         {% block content %}{% endblock %}
+        {% include 'include/_pagination.html' %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

@@ -21,31 +21,25 @@
             console.log(arrcoords[i]);
         }
     }
-
 </script>
 <div class="col-md-12">
-    <div class="d-flex justify-content-center">
-        <div id="customMapPlaceRemember" style="width: 600px; height: 400px"></div>
-    </div>
-    {% for item in places %}
+    <div id="customMapPlaceRemember" style="width: 600px; height: 400px"></div>
     <div class="card mb-3">
         <div class="card-header">
-            <p>{% trans 'Автор' %}: <span>{{ item.auth }}</span></p>
+            <p>{% trans 'Автор' %}: <a href="#">{{ detail.auth }}</a></p>
         </div>
         <p></p>
         <div class="card-body">
-                <div class="media">
-                    <div class="media-body">
-                        <h5 class="card-title">{{ item.title }}</h5>
-                        <p class="card-text">{{ item.get_trim_review|safe|linebreaks }}</p>
-                        <a href="{% url 'detail' item.slug %}" class="btn btn-primary">{% trans 'Смотреть детально' %}...</a>
-                    </div>
+            <div class="media">
+                <div class="media-body">
+                    <h5 class="card-title">{{ detail.title }}</h5>
+                    <p class="card-text">{{ detail.review }}</p>
                 </div>
+            </div>
         </div>
         <div class="card-footer text-muted">
-            <p>{% trans 'Дата создания' %}: {{ item.created_at|date:"Y.m.d" }}</p>
+            <p>{% trans 'Дата создания' %}: {{ detail.created_at|date:"Y.m.d" }}</p>
         </div>
     </div>
-    {% endfor %}
 </div>
 {% endblock %}
