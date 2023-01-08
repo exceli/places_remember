@@ -1,7 +1,7 @@
 {% load i18n static account %}
 
 
-<nav class="navbar bg-body-tertiary navbar-dark bg-dark">
+<nav class="navbar bg-body-tertiary navbar-dark">
     <div class="container-fluid">
         <a href="{% url 'home' %}" class="navbar-brand">Places Remember</a>
         <span class="navbar-text">
@@ -13,14 +13,14 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a style="color: black;" href="{% url 'created' %}" class="dropdown-item"
-                               type="button">{% trans 'Добавить воспоминание' %}</a></li>
+                               type="button">{% trans 'Add remember' %}</a></li>
                         <li><a style="color: black;" href="{% url 'account_logout' %}" class="dropdown-item"
-                               type="button">{% trans 'Выход' %}</a></li>
+                               type="button">{% trans 'Logout' %}</a></li>
                     </ul>
                 </div>
             {% else %}
-                <a href="{% url 'account_signup' %}">{% trans 'Регистрация' %}</a> | <a
-                href="{% url 'account_login' %}?next={{ request.get_full_path }}">{% trans 'Вход' %}</a>
+                <a href="{% url 'account_signup' %}">{% trans 'Register' %}</a> | <a
+                href="{% url 'account_login' %}?next={{ request.get_full_path }}">{% trans 'Login' %}</a>
             {% endif %}
       </span>
     </div>

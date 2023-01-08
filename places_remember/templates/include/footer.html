@@ -1,17 +1,21 @@
-{% load i18n static account %}
+{% load i18n %}
 
 
-<nav class="navbar bg-body-tertiary navbar-dark bg-dark">
-    <div class="container-fluid">
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam velit ex eveniet voluptatibus vel deserunt
-            nihil fugiat quasi ducimus beatae tempora, quisquam cum, quibusdam officiis. Pariatur alias molestiae
-            inventore aliquid!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque dolorum placeat, soluta fuga totam nihil
-            libero impedit beatae. Minus corporis quod perspiciatis in laborum autem est unde repudiandae deleniti
-            blanditiis!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim dolores itaque minima, tempore rem, assumenda
-            quam recusandae quo suscipit pariatur velit, aliquam illum! Fugit maxime asperiores, placeat vero numquam
-            veniam.
-        </p>
-    </div>
-</nav>
+<div class="text-center">
+    <p class="p-3 text-white">© 2023 Copyright</p>
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}">
+        <select name="language">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Go">
+    </form>
+</div>

@@ -7,10 +7,11 @@ from .forms import PlaceForm
 from .models import Place
 
 
-class PlaceView(LoginRequiredMixin, ListView):
+class PlaceView(ListView):
     model = Place
     template_name = 'remember/index.html'
     context_object_name = 'places'
+    permission_required = ('app_remember.view_place',)
     paginate_by = 5
 
 
@@ -27,7 +28,6 @@ class CreatedPlaceView(LoginRequiredMixin, CreateView):
         context['form'] = form
         return context
 
-
     def form_valid(self, form):
         self.object = form.save(commit=False)
         user = SocialAccount.objects.get(user=self.request.user)
@@ -41,5 +41,5 @@ class DetailPlaceView(LoginRequiredMixin, DetailView):
     template_name = 'remember/place_detail.html'
     context_object_name = 'detail'
     slug_url_kwarg = 'detail_slug'
-
+    raise_exception = True
 
