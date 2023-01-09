@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<h1>{% trans 'Adding a memory' %}</h1>
+<div class="p-3">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="customMapPlaceRemember" style="width: 600px; height: 400px"></div>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block">{% trans 'Add' %}</button>
+    </form>
+</div>
+<script type="text/javascript" src="{% static 'app_remember/js/index.js' %}"></script>
+{% endblock %}

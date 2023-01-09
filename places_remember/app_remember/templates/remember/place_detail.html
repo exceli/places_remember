@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block content %}
+<script type="text/javascript">
+    ymaps.ready(init);
+
+    function init() {
+        var arrcoords = [];
+        // var arrcoords = document.getElementById("arrcoords").value;
+        arrcoords.push(document.getElementById("arrcoords").value.split(',').map(string => parseFloat(string)))
+
+        var myMap = new ymaps.Map('customMapPlaceRemember', {
+            center: [55.76, 37.64],
+            zoom: 9,
+            controls: ['zoomControl', 'typeSelector', 'rulerControl']
+        });
+
+        for (i = 0; i < arrcoords.length; ++i) {
+            pl = new ymaps.Placemark(arrcoords[i]);
+            myMap.geoObjects.add(pl);
+            console.log(arrcoords[i]);
+        }
+    }
+
+</script>
+<input type="hidden" id="arrcoords" name="coords" value="{{ detail.address }}">
+<div class="col-md-12">
+    <div class="d-flex justify-content-center">
+        <div id="customMapPlaceRemember" style="width: 600px; height: 400px"></div>
+    </div>
+    <div class="card mb-3">
+        <div class="card-header">
+            <p>{% trans 'Author' %}: <a href="#">{{ detail.auth }}</a></p>
+        </div>
+        <p></p>
+        <div class="card-body">
+            <div class="media">
+                <div class="media-body">
+                    <h5 class="card-title">{{ detail.title }}</h5>
+                    <p class="card-text">{{ detail.review }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <p>{% trans 'Date of create' %}: {{ detail.created_at|date:"Y.m.d" }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
