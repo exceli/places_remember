@@ -1,0 +1,27 @@
+{% load i18n static account %}
+
+
+<nav class="navbar bg-body-tertiary navbar-dark">
+    <div class="container-fluid">
+        <a href="{% url 'home' %}" class="navbar-brand">Places Remember</a>
+        <span class="navbar-text">
+            {% if request.user.is_authenticated %}
+                <div>
+                    <span style="color: while;">{{ user.username }}</span>
+                    <a type="button" class="btn btn-custom" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="profile-image" src="{{ user.socialaccount_set.all.0.get_avatar_url }}">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a style="color: black;" href="{% url 'created' %}" class="dropdown-item"
+                               type="button">{% trans 'Add remember' %}</a></li>
+                        <li><a style="color: black;" href="{% url 'account_logout' %}" class="dropdown-item"
+                               type="button">{% trans 'Logout' %}</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <a href="{% url 'account_signup' %}">{% trans 'Register' %}</a> | <a
+                href="{% url 'account_login' %}?next={{ request.get_full_path }}">{% trans 'Login' %}</a>
+            {% endif %}
+      </span>
+    </div>
+</nav>
