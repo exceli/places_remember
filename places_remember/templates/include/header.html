@@ -15,12 +15,12 @@
                         <li><a style="color: black;" href="{% url 'created' %}" class="dropdown-item"
                                type="button">{% trans 'Add remember' %}</a></li>
                         <li><a style="color: black;" href="{% url 'account_logout' %}" class="dropdown-item"
-                               type="button">{% trans 'Logout' %}</a></li>
+                               type="button">{% trans 'Log out' %}</a></li>
                     </ul>
                 </div>
             {% else %}
                 <a href="{% url 'account_signup' %}">{% trans 'Register' %}</a> | <a
-                href="{% url 'account_login' %}">{% trans 'Login' %}</a>
+                href="{% url 'account_login' %}">{% trans 'Log in' %}</a>
             {% endif %}
       </span>
     </div>

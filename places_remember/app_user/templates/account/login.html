@@ -1,37 +1,42 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
+{% load static i18n %}
 {% load account socialaccount %}
 
 {% block title %}
     {% trans "Login" %}
 {% endblock %}
 
+{% block css_additional %}
+    <link type="text/css" rel="stylesheet" href="{% static 'app_user/css/normalize.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'app_user/css/style.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>{% trans "Login" %}</h1>
+<h1>{% trans "Log in to your account" %}</h1>
 
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one of your existing third party
-    accounts. Or <a href="{{ signup_url }}">register</a>
-    account and sign in below:{% endblocktrans %}</p>
 
-<div class="socialaccount_ballot">
+    <div class="socialaccount_ballot">
 
-    <ul class="socialaccount_providers">
-        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-    </ul>
+        <ul class="socialaccount_providers">
+            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </ul>
 
-    <div class="login-or">{% trans 'or' %}</div>
+        <div class="login-or">{% trans 'Or log in with an email' %}</div>
 
-</div>
+    </div>
 
-{% include "socialaccount/snippets/login_extra.html" %}
+    {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p>{% blocktrans %}If you have not yet created an account, please first
-    <a href="{{ signup_url }}">register</a>.{% endblocktrans %}</p>
+    <p>
+        {% blocktrans %}
+            If you have not yet created an account, please first <a href="{{ signup_url }}">register</a>.
+        {% endblocktrans %}
+    </p>
 {% endif %}
 
 <form class="login" method="POST" action="{% url 'account_login' %}">

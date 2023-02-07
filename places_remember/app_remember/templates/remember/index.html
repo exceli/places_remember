@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load static i18n %}
 
 {% block title %}
-    {% trans 'Places Remember' %}
+    {% trans 'Remembers' %}
 {% endblock %}
 
+{% block css_additional %}
+    <link type="text/css" rel="stylesheet" href="{% static 'app_remember/css/normalize.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'app_remember/css/style.css' %}">
+{% endblock %}
 
 {% block content %}
 {% if request.user.is_authenticated %}
