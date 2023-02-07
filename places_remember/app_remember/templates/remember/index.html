@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
+{% block title %}
+    {% trans 'Places Remember' %}
+{% endblock %}
+
 
 {% block content %}
 {% if request.user.is_authenticated %}
@@ -33,7 +37,7 @@
         {% endif %}
     </div>
 {% else %}
-    <p class="p-2 text-center">{% trans "You don't have any Service yet where you can store your impressions of visited places" %}.</p>
+    <h1 class="h-1 text-center">{% trans "Hey! This is a service that helps to leave memories of the places visited" %}.</h1>
     <p class="p-2 text-center">{% trans 'To start using, please login or register' %}.</p>
 {% endif %}
 {% endblock %}

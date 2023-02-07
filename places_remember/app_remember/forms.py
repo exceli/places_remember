@@ -7,6 +7,9 @@ class PlaceForm(forms.ModelForm):
         model = Place
         fields = ('address', 'title', 'review',)
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-input'}),
-            'review': forms.Textarea(attrs={'cols': 60, 'rows': 5}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'review': forms.Textarea(attrs={
+                'class': 'form-control',
+                'cols': 60, 'rows': 5,
+            }),
         }

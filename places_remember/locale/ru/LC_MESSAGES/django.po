@@ -33,6 +33,10 @@ msgstr "Автор"
 msgid "More"
 msgstr "Подробнее"
 
+#: app_remember/templates/remember/index.html:14
+msgid "Hey! This is a service that helps to leave memories of the places visited"
+msgstr "Привет! Это сервис, который помогает оставить воспоминания о посещенных местах"
+
 #: app_remember/models.py:12
 msgid "Address"
 msgstr "Адресс"

@@ -1,9 +1,9 @@
 {% load i18n %}
 
 
-<div class="text-center">
-    <p class="p-3 text-white">© 2023 Copyright</p>
-    <form action="{% url 'set_language' %}" method="post">
+<div class="d-flex justify-content-between">
+    <p class="p-3 text-white">© 2023 Copyright: exceli</p>
+    <form class="p-3" action="{% url 'set_language' %}" method="post">
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ redirect_to }}">
         <select name="language">
