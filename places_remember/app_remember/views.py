@@ -1,5 +1,6 @@
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.forms import HiddenInput
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
@@ -30,7 +31,7 @@ class CreatedPlaceView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        user = SocialAccount.objects.get(user=self.request.user)
+        user = self.request.user
         self.object.auth = user
         self.object.save()
         return super().form_valid(form)

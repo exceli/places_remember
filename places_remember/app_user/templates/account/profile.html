@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static i18n %}
+{% load account %}
+
+
+{% block content %}
+{% if request.user.is_authenticated %}
+    <div class="col-md-12">
+        <h1>{% trans 'My Remembers' %}</h1>
+        {% if places %}
+            {% for item in places %}
+            <input type="hidden" id="arrcoords" name="coords" value="{{ item.address }}">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <p>{% trans 'Author' %}: <span>{{ item.auth }}</span></p>
+                </div>
+                <p></p>
+                <div class="card-body">
+                    <div class="media">
+                        <div class="media-body">
+                            <h5 class="card-title">{{ item.title }}</h5>
+                            <p class="card-text p-1">{{ item.get_trim_review|safe|linebreaks }}</p>
+                            <a href="{% url 'detail' item.slug %}" class="btn btn-primary">{% trans 'More' %}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <p>{% trans 'Date of create' %}: {{ item.created_at|date:"Y.m.d" }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="p-3">{% trans "You don't have any memories yet" %}.</p>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}
