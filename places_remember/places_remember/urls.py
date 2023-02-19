@@ -24,6 +24,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path("accounts/", include('allauth.urls')),
     path("", include('app_remember.urls')),
+    path("user/", include('app_user.urls')),
 ] + static(
     settings.STATIC_URL,
     document_root=settings.STATIC_ROOT
