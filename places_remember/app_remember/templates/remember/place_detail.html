@@ -7,11 +7,12 @@
     ymaps.ready(init);
 
     function init() {
+        var myMap;
         var arrcoords = [];
         // var arrcoords = document.getElementById("arrcoords").value;
         arrcoords.push(document.getElementById("arrcoords").value.split(',').map(string => parseFloat(string)))
 
-        var myMap = new ymaps.Map('customMapPlaceRemember', {
+        myMap = new ymaps.Map('customMapPlaceRemember', {
             center: [55.76, 37.64],
             zoom: 9,
             controls: ['zoomControl', 'typeSelector', 'rulerControl']
@@ -39,6 +40,11 @@
                 <div class="media-body">
                     <h5 class="card-title">{{ detail.title }}</h5>
                     <p class="card-text">{{ detail.review }}</p>
+                    {% for img in detail.images.all %}
+                    <div>
+                        <img style="width: 100px;" src="{{ img.images.url }}" alt="">
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

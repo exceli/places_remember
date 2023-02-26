@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "app_remember.apps.AppRememberConfig",
     "app_user.apps.AppUserConfig",
+    'debug_toolbar',
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "places_remember.urls"
@@ -157,3 +159,7 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

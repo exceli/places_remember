@@ -20,7 +20,9 @@ class Place(models.Model):
         return reverse('detail', kwargs={'detail_slug': self.slug})
 
     def get_trim_review(self):
-        return f'{self.review[:15]}...'
+        if len(self.review) > 50:
+            return f'{self.review[:15]}...'
+        return self.review
 
     def __str__(self):
         return self.title
@@ -33,3 +35,12 @@ class Place(models.Model):
         verbose_name = _('place')
         verbose_name_plural = _('places')
         ordering = ['-created_at']
+
+
+def place_images_directory_path(instance: 'Images', filename: str) -> str:
+    return f'places/places_{instance.place.pk}/images/{filename}'
+
+
+class Images(models.Model):
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images', verbose_name=_('Photos'))
+    images = models.ImageField(upload_to=place_images_directory_path)
