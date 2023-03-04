@@ -16,7 +16,6 @@
         <h1>{% trans 'Remembers' %}</h1>
         {% if places %}
             {% for item in places %}
-            <input type="hidden" id="arrcoords" name="coords" value="{{ item.address }}">
             <div class="card mb-3">
                 <div class="card-header">
                     <p>{% trans 'Author' %}: <span>{{ item.auth }}</span></p>

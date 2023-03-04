@@ -85,8 +85,12 @@ WSGI_APPLICATION = "places_remember.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'places_remember',
+        'USER': 'postgres',
+        'PASSWORD': 'DonyaPasswordPostgreSQL',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
