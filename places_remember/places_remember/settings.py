@@ -86,11 +86,11 @@ WSGI_APPLICATION = "places_remember.wsgi.application"
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'places_remember',
-        'USER': 'postgres',
-        'PASSWORD': 'DonyaPasswordPostgreSQL',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'hello_django_dev',
+        'USER': 'hello_django',
+        'PASSWORD': 'hello_django',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
@@ -157,6 +157,8 @@ MEDIA_URL = '/media/'
 SITE_ID = 1
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = 'app_user.CustomUser'
 
 LOGIN_REDIRECT_URL = 'profile'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1

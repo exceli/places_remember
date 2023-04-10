@@ -1,4 +1,5 @@
 from allauth.socialaccount.models import SocialAccount
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -8,7 +9,7 @@ from django_ymap.fields import YmapCoord
 
 
 class Place(models.Model):
-    auth = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('Author'))
+    auth = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('Author'))
     address = YmapCoord(max_length=200, start_query=u'Россия', size_width=500, size_height=500, verbose_name=_('Address'))
     title = models.CharField(max_length=150, db_index=True, verbose_name=_('Title'))
     review = models.CharField(max_length=10000, verbose_name=_('Remember'))
