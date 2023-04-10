@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "app_remember.apps.AppRememberConfig",
     "app_user.apps.AppUserConfig",
+    'debug_toolbar',
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "places_remember.urls"
@@ -83,8 +85,12 @@ WSGI_APPLICATION = "places_remember.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hello_django_dev',
+        'USER': 'hello_django',
+        'PASSWORD': 'hello_django',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
@@ -152,8 +158,14 @@ SITE_ID = 1
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+AUTH_USER_MODEL = 'app_user.CustomUser'
+
 LOGIN_REDIRECT_URL = 'profile'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

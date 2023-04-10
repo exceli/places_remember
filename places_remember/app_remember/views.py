@@ -1,11 +1,9 @@
-from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.forms import HiddenInput
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 from .forms import PlaceForm
-from .models import Place
+from .models import Place, Images
 
 
 class PlaceView(ListView):
@@ -30,11 +28,18 @@ class CreatedPlaceView(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
+        response = super().form_valid(form)
+        # self.object = form.save(commit=False)
+        for image in form.files.getlist('images'):
+            Images.objects.create(
+                place=self.object,
+                images=image,
+            )
+
         user = self.request.user
         self.object.auth = user
         self.object.save()
-        return super().form_valid(form)
+        return response
 
 
 class DetailPlaceView(LoginRequiredMixin, DetailView):
@@ -43,4 +48,5 @@ class DetailPlaceView(LoginRequiredMixin, DetailView):
     context_object_name = 'detail'
     slug_url_kwarg = 'detail_slug'
     raise_exception = True
+    queryset = Place.objects.prefetch_related('images')
 

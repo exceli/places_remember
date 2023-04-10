@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="places_remember/static/app_remember/images/free-icon-camera-5203048.png" width=150 height=150>
+    <img src="places_remember/app_remember/static/app_remember/img/free-icon-camera-5203048.png" width=150 height=150>
 </div>
 
 <h1 align="center">📍Places Remember</h1>
@@ -19,5 +19,9 @@ This is a service that allows you to leave memories of visited places with the a
 ---
 
 ### Usage
-TODO
+```docker-compose up```
+
+If we want to create a superuser
+
+```docker exec -it places_remember python manage.py createsuperuser```
 
